@@ -5,8 +5,10 @@ class TaskController extends Controller {
 
     public function indexAction(){
 
-        echo "hola desde indexAction";
+        // DEBUG:
+        // echo "hola desde indexAction";
     }
+    
     public function addAction(){
         echo "hola desde addAction";
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

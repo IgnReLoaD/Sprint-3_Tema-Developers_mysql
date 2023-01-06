@@ -83,8 +83,10 @@ class UserController extends ApplicationController
                 // 2. Instanciem l'objecte real        
                 $objUser = new UserModel($fields);            
             
-                // 3. interactuar amb Model (mètode seu) per llegir/grabar
-                $result = $objUser->saveJson($objUser->_arrUsers,$objUser->_fields);                 
+                // 3. interactuar amb Model (mètode seu) per llegir/grabar                
+                // $result = $objUser->saveMySql($objUser->_arrUsers,$objUser->_fields);
+                // $result = $objUser->saveMySql($objUser->_fields);
+                $result = $objUser->saveMySql($cnn);
 
                 // 4. permetem anar a View Tasks, o mens Error
                 if ($result==true){

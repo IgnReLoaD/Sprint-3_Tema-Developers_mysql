@@ -33,10 +33,9 @@
         </div>
         <select class="form-control" id="cmbMaster" name="cmbMaster" autofocus>
             <option value="0" name="optMaster">usuaris...</option>                    
-            <?php                      
-                // echo $fieldset;
-                while ($fieldset1 = mysqli_fetch_array($recordsetUsers)){
-                    echo'<option value="'.$fieldset1['id_user'].'">'.$fieldset1['rol'].' - '.$fieldset1['name'].'</option>';
+            <?php                                      
+                while ($fieldset = mysqli_fetch_array($recordsetUsers)){
+                    echo'<option value="'.$fieldset['id_user'].'">'.$fieldset['rol'].' - '.$fieldset['name'].'</option>';
                 }
             ?>
         </select> 
@@ -44,21 +43,9 @@
             <option value="0" name="optMaster">tasques...</option>                    
             <?php                      
                 // echo $fieldset;
-                while ($fieldset1 = mysqli_fetch_array($recordsetTasks)){
-                    echo'<option value="' . $fieldset1['id_task'] . '">' . 'Created: ' . $fieldset1['created_at'].' - Descrip: ' . $fieldset1['descrip'].' - Master: '.$fieldset1['masterUsr_id'].' - Slave: '.$fieldset1['slaveUsr_id'].' - Status: '.$fieldset1['currentStatus'].'</option>';
+                while ($fieldset = mysqli_fetch_array($recordsetTasks)){
+                    echo'<option value="' . $fieldset['id_task'] . '">' . 'Created: ' . $fieldset['created_at'].' - Descrip: ' . $fieldset['descrip'].' - Master: '.$fieldset['masterUsr_id'].' - Slave: '.$fieldset['slaveUsr_id'].' - Status: '.$fieldset['currentStatus'].'</option>';
                 }
             ?>
         </select> 
     </nav>
-
-    <!-- <p>BD - JSON: users.json</p> -->
-    <?php include("../db/users.json"); ?>
-    <br>
-
-    <!-- <h3>BD - JSON: tasks.json</h3> -->
-    <!-- <?php include("../db/tasks.json"); ?> -->
-    <!-- <br><br> -->
-
-    <!-- <h3>BD - JSON: status.json</h3> -->
-    <!-- <?php include("../db/status.json"); ?> -->
-    <!-- <br><br> -->
