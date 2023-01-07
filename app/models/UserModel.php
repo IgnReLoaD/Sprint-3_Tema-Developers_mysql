@@ -69,34 +69,37 @@ class UserModel {
         return $match;
     }
 
-    public function saveMySql($cnn){
-    // public function saveMySql(array $singleUser){
-    // public function saveJson($arrUsers, array $singleUser){
+    public function saveMySql(){
+
+        $settings = parse_ini_file('../config/settings.ini', true);
+        $nomDriverBaseDeDades = $settings['databaseMySql']['dbDriver'];
+        $nomServerBaseDeDades = $settings['databaseMySql']['ServHost'];
+        $nomNostraBaseDeDades = $settings['databaseMySql']['dataBase'];
+        $nomUsuariBaseDeDades = $settings['databaseMySql']['usr'];
+        $pwdUsuariBaseDeDades = $settings['databaseMySql']['pwd'];				    
+        // crear objecte cnn de tipus class mysqli(server,user,pwd,nameBD)
+        //      també es pot fer:  $cnn = mysqli_connect('localhost','root','','php_mysql_crud');
+        $cnn = new mysqli($nomServerBaseDeDades, 
+                          $nomUsuariBaseDeDades, 
+                          $pwdUsuariBaseDeDades, 
+                          $nomNostraBaseDeDades);                
+
         $result = false;
-        if (!empty($cnn)){      
-            // $this->_fields=array(
-            $strNom = $this->_fields['nom'];
-            $strCog = $this->_fields['cog'];
-            $strRol = $this->_fields['rol'];
-            $strPwd = $this->_fields['pwd'];
-            echo "<br><br>strNom=".$strNom."<br>strCog=".$strCog."<br>strRol=".$strRol."<br>strPwd=".$strPwd."<br>";
 
-            $queryInsert = "INSERT INTO users(name, cog, rol, pwd) VALUES (";
-            $queryInsert .= " '$strNom', '$strCog', '$strRol', '$strPwd')";   
-            // $queryInsert .= "'$this->_fields['nom']'";
-            // $queryInsert .= ",'$this->_fields['cog']'";
-            // $queryInsert .= ",'$this->_fields['rol']'";
-            // $queryInsert .= ",'$this->_fields['pwd']'";            
-            // $queryInsert .= ")";
-
-            echo "<br> " . $queryInsert;
-            $result = mysqli_query($cnn, $queryInsert);        
-            if (!$result) {
-                $_SESSION['message'] = 'not saved!';
-                $_SESSION['message_type'] = 'danger';
-                die("Query failed !!");
-            }                           
-        }
+        $strNom = $this->_fields['nom'];
+        $strCog = $this->_fields['cog'];
+        $strRol = $this->_fields['rol'];
+        $strPwd = $this->_fields['pwd'];
+        // echo "<br><br>strNom=".$strNom."<br>strCog=".$strCog."<br>strRol=".$strRol."<br>strPwd=".$strPwd."<br>";
+        $queryInsert = "INSERT INTO users(name, cog, rol, pwd) VALUES (";
+        $queryInsert .= " '$strNom', '$strCog', '$strRol', '$strPwd')";   
+        // echo "<br> " . $queryInsert;
+        $result = mysqli_query($cnn, $queryInsert);        
+        if (!$result) {
+            $_SESSION['message'] = 'not saved!';
+            $_SESSION['message_type'] = 'danger';
+            die("Query failed !!");
+        }                           
         return $result? true : false;                
     }
 

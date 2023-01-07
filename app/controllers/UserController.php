@@ -86,7 +86,7 @@ class UserController extends ApplicationController
                 // 3. interactuar amb Model (mètode seu) per llegir/grabar                
                 // $result = $objUser->saveMySql($objUser->_arrUsers,$objUser->_fields);
                 // $result = $objUser->saveMySql($objUser->_fields);
-                $result = $objUser->saveMySql($cnn);
+                $result = $objUser->saveMySql();
 
                 // 4. permetem anar a View Tasks, o mens Error
                 if ($result==true){
